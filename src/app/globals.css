@@ -1,0 +1,95 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
+
+@custom-variant dark (&:is(.dark *));
+:root {
+  --background: #f8fafc;
+  --card: #ffffff;
+  --foreground: #0f172a;
+  --primary: #2563eb;
+  --primary-foreground: #ffffff;
+  --muted-foreground: #58667c;
+  --border: #e2e8f0;
+  --accent: #eff3f8;
+  --ring: #2563eb;
+  --destructive: #b42332;
+  --success: #15754f;
+}
+.dark {
+  --background: #0b1220;
+  --card: #151e2d;
+  --foreground: #e8edf7;
+  --primary: #4f8cff;
+  --primary-foreground: #081326;
+  --muted-foreground: #a4b1c6;
+  --border: #2a364a;
+  --accent: #202d42;
+  --ring: #80adff;
+  --destructive: #ff8d97;
+  --success: #6fd8ab;
+}
+@theme inline {
+  --color-background: var(--background);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-ring: var(--ring);
+  --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --font-sans: "Inter Variable", Arial, sans-serif;
+}
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+  }
+  button,
+  summary,
+  select {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+  }
+  ::selection {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+}
+@layer components {
+  .field {
+    @apply flex min-h-12 w-full rounded-xl border bg-card px-3.5 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/15 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .panel {
+    @apply rounded-2xl border bg-card;
+  }
+  .page-title {
+    @apply text-2xl font-semibold tracking-tight sm:text-3xl;
+  }
+  .page-description {
+    @apply mt-2 text-sm leading-6 text-muted-foreground;
+  }
+  .field-label {
+    @apply mb-2 block text-sm font-medium;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

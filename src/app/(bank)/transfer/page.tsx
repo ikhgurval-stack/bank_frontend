@@ -60,7 +60,7 @@ export default function TransferPage() {
   const recipient = currentLookup?.recipient;
   const recipientLoading = validRecipientNumber && !currentLookup;
   useEffect(() => {
-    if (!/^DMB\d{12}$/.test(recipientNumber)) return;
+    if (!validRecipientNumber) return;
     let current = true;
     const controller = new AbortController();
     const timer = setTimeout(async () => {
@@ -84,7 +84,7 @@ export default function TransferPage() {
       clearTimeout(timer);
       controller.abort();
     };
-  }, [recipientNumber, lookupRevision]);
+  }, [recipientNumber, validRecipientNumber, lookupRevision]);
   const intent = useRef<{ fingerprint: string; key: string } | null>(null);
   const lock = useRef(false);
   function updateForm(changes: Partial<TransferRequest>) {
@@ -127,7 +127,7 @@ export default function TransferPage() {
     event.preventDefault();
     const request = {
       ...form,
-      toAccountNumber: form.toAccountNumber.trim().toUpperCase(),
+      toAccountNumber: recipientNumber,
       description: form.description.trim(),
     };
     const validation = validateTransfer(request, accounts || []);

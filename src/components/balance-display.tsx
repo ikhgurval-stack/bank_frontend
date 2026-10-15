@@ -22,7 +22,7 @@ function snapshot(): Currency {
     return memoryPreference;
   }
 }
-export function useDisplayCurrency() {
+function useDisplayCurrency() {
   return useSyncExternalStore(subscribe, snapshot, (): Currency => "MNT");
 }
 function selectCurrency(currency: Currency) {

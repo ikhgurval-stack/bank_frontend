@@ -245,7 +245,7 @@ test("real registration, session, account, transfer, history and responsive them
   await expect(
     page.getByText("Болд Бат-Эрдэнэ", { exact: true }),
   ).toBeVisible();
-  await page.getByLabel("Оруулах валют").selectOption("USD");
+  await page.getByLabel("Валют", { exact: true }).selectOption("USD");
   await page.getByLabel("Мөнгөн дүн", { exact: true }).fill("100.00");
   await page
     .getByLabel("Гүйлгээний утга", { exact: true })
